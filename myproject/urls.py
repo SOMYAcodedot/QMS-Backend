@@ -21,11 +21,16 @@ Including another URLconf
 #     path('admin/', admin.site.urls),
 # ]
 
-from django.contrib import admin
+from django.contrib import admin  # Import the admin module
 from django.urls import path, include
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-   path('api/', include('api.urls')),  # yourapp should be replaced with your app name
+    path('admin/', admin.site.urls),  # Admin path
+    path('api/', include('api.urls')),  # Include the API's URLs
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
+
+
 
